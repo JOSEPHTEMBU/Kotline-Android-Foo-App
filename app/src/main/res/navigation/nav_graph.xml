@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeF">
+
+    <fragment
+        android:id="@+id/homeF"
+        android:name="com.example.androidfoodapp.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment1_to_favoritesFragment2"
+            app:destination="@id/favoritesFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment2"
+        android:name="com.example.androidfoodapp.fragments.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment2_to_favoritesCategories"
+            app:destination="@id/favoritesCategories" />
+        <action
+            android:id="@+id/action_favoritesFragment2_to_homeFragment1"
+            app:destination="@id/homeF" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/favoritesCategories"
+        android:name="com.example.androidfoodapp.fragments.FavoritesFragment"
+        android:label="fragment_favorites"
+        tools:layout="@layout/fragment_category" >
+        <action
+            android:id="@+id/action_favoritesCategories_to_favoritesFragment2"
+            app:destination="@id/favoritesFragment2" />
+    </fragment>
+</navigation>
