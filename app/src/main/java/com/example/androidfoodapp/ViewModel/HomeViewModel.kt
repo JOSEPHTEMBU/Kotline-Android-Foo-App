@@ -21,6 +21,8 @@ fun getRandomMeal(){
          if(response.body() != null){
             val randomMeal = response.body()!!.meals[0]
             randomMealliveData.value = randomMeal
+
+
 //            Log.d("HomeFragment", "meal id${randomMeal.idMeal} ${randomMeal.strMeal}")
 
 //            Glide.with(this@HomeFragment1)

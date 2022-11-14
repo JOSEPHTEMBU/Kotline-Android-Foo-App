@@ -1,5 +1,6 @@
 package com.example.androidfoodapp.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,19 +11,24 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.bumptech.glide.Glide
 import com.example.androidfoodapp.ViewModel.HomeViewModel
+import com.example.androidfoodapp.activities.MealActivity
 import com.example.androidfoodapp.databinding.FragmentHomeBinding
 import com.example.androidfoodapp.pojo.Meal
 
-import com.example.androidfoodapp.pojo.MealList
-import com.example.androidfoodapp.retrofit.RetrofitInstance
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class HomeFragment : Fragment() {
 
+    private lateinit var randomMeal: Meal
     private lateinit var binding: FragmentHomeBinding
     private lateinit var homeMvvm:HomeViewModel
+
+
+    companion object{
+        const val MEAL_ID ="com.example.androidfoodapp.fragments.idMeal"
+        const val MEAL_NAME ="com.example.androidfoodapp.fragments.idName"
+        const val MEAL_THUMB ="com.example.androidfoodapp.fragments.thumbMeal"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -46,6 +52,9 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         homeMvvm.getRandomMeal()
         observeRandomMeal()
+        onRandomMealClick()
+
+            //THIS CODE BELOW MOVED TO HOME VIEW MODEL//
 
 //        RetrofitInstance.api.getRandomMeal().enqueue(object : Callback<MealList?> {
 //            override fun onResponse(call: Call<MealList?>, response: Response<MealList?>) {
@@ -73,13 +82,27 @@ class HomeFragment : Fragment() {
 
     }
 
+    private fun onRandomMealClick() {
+        binding.imageRandomMeal.setOnClickListener(){
+            val intent= Intent(activity, "MealActivity"::class.java)
+            intent.putExtra(MEAL_ID,randomMeal.idMeal)
+            intent.putExtra(MEAL_NAME,randomMeal.strMeal)
+            intent.putExtra(MEAL_THUMB,randomMeal.strMealThumb)
+            startActivity(intent)
+        }
+
+    }
+
     private fun observeRandomMeal() {
-      homeMvvm.observeRandomMeamLiveData().observe(viewLifecycleOwner,object:Observer<Meal>{
-          override fun onChanged(t: Meal?) {
+      homeMvvm.observeRandomMeamLiveData().observe(viewLifecycleOwner,
+          { meal ->
               Glide.with(this@HomeFragment)
-                  .load(t!!.strMealThumb)
+                  .load(meal.strMealThumb)
                   .into(binding.imageRandomMeal)
-          }
+
+                   this.randomMeal = meal
+
+
 
       })
     }
