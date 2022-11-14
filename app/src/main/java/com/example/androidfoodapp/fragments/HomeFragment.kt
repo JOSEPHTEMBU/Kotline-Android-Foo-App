@@ -84,7 +84,7 @@ class HomeFragment : Fragment() {
 
     private fun onRandomMealClick() {
         binding.imageRandomMeal.setOnClickListener(){
-            val intent= Intent(activity, "MealActivity"::class.java)
+            val intent= Intent(activity, MealActivity::class.java)
             intent.putExtra(MEAL_ID,randomMeal.idMeal)
             intent.putExtra(MEAL_NAME,randomMeal.strMeal)
             intent.putExtra(MEAL_THUMB,randomMeal.strMealThumb)

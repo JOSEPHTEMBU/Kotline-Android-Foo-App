@@ -42,7 +42,7 @@ class MealActivity : AppCompatActivity() {
         setInformationInviews()
         loadingCase()
 
-        mealMvvm.getMealDetails()
+        mealMvvm.getMealDetails(mealId)
         observeMealDetailsLiveData()
         onYoutubeImageClick()
     }
