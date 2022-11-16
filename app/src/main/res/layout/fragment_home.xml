@@ -97,7 +97,7 @@
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/over_popular"
+        android:id="@+id/overPopular"
         android:layout_width="300dp"
         android:layout_height="83dp"
         app:layout_constraintBottom_toBottomOf="parent"
