@@ -70,6 +70,9 @@ class HomeFragment : Fragment() {
 
           observePopularItemsLiveData()
           onPopularItemClick()
+
+//        log.d("TESTS","meal id ${randomMeal.idMeal} name  ${randomMeal.strMeal}")
+
             //THIS CODE BELOW MOVED TO HOME VIEW MODEL//
 
 //        RetrofitInstance.api.getRandomMeal().enqueue(object : Callback<MealList?> {
@@ -100,7 +103,8 @@ class HomeFragment : Fragment() {
 
     private fun onPopularItemClick() {
         popularItemsaAdapter.onItemClick = {Meal ->
-        val intent = Intent(activity,MealActivity::class.java)
+
+            val intent = Intent(activity,MealActivity::class.java)
             intent.putExtra(MEAL_ID,Meal.idMeal)
             intent.putExtra(MEAL_NAME,Meal.strMeal)
             intent.putExtra(MEAL_THUMB,Meal.strMealThumb)
