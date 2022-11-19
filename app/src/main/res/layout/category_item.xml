@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/image_category"
-        android:layout_width="150sp"
-        android:layout_height="150sp"
+        android:layout_width="65sp"
+        android:layout_height="65sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,7 +26,7 @@
         app:layout_constraintTop_toBottomOf="@id/image_category"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:textSize="35sp"
+        android:textSize="20sp"
         android:text="Category Name"
         android:textColor="@color/black"
         android:layout_marginTop="6sp">

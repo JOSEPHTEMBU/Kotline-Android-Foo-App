@@ -14,6 +14,7 @@ import retrofit2.Response
 class HomeViewModel():ViewModel() {
    private var randomMealliveData = MutableLiveData<Meal>()
    private var popularItemsLiveData = MutableLiveData<List<MealsByCategory>>()
+   private  var categoriesLiveData = MutableLiveData<List<Category>>()
    fun getRandomMeal() {
       RetrofitInstance.api.getRandomMeal().enqueue(object : Callback<MealList?> {
          override fun onResponse(call: Call<MealList?>, response: Response<MealList?>) {
@@ -59,11 +60,14 @@ class HomeViewModel():ViewModel() {
    fun getCategories(){
       RetrofitInstance.api.getCategories().enqueue(object : Callback<CategoryList?> {
          override fun onResponse(call: Call<CategoryList?>, response: Response<CategoryList?>) {
+             response.body()?.let{ CategoryList->
+               categoriesLiveData.postValue (CategoryList.categories)
 
+            }
          }
 
          override fun onFailure(call: Call<CategoryList?>, t: Throwable) {
-
+          Log.e("HomeViewModel",t.message.toString())
          }
 
 
@@ -76,5 +80,8 @@ class HomeViewModel():ViewModel() {
    fun observePopularItemsLiveData(): MutableLiveData<List<MealsByCategory>> {
       return popularItemsLiveData
 
+   }
+   fun observeCategoriesLiveData() : LiveData<List<Category>> {
+      return categoriesLiveData
    }
 }
