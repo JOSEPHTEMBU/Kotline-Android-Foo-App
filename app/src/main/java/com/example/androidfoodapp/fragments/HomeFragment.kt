@@ -107,7 +107,8 @@ class HomeFragment : Fragment() {
 
     private fun onCategoryClick() {
         categoriesAdapter.onItemClick = {category ->
-      val intent = Intent(activity,CategoryMealsActivity::class.java)
+
+            val intent = Intent(activity,CategoryMealsActivity::class.java)
             intent.putExtra(CATEGORY_NAME,category.strCategory)
             startActivity(intent)
 

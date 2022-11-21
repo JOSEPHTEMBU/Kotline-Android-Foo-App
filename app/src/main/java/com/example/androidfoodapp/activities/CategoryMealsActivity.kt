@@ -17,31 +17,42 @@ import com.example.androidfoodapp.pojo.MealList
 
 class CategoryMealsActivity : AppCompatActivity() {
     lateinit var binding: ActivityCategoryMealsBinding
-   lateinit var categoryMealsViewModel: CategoryMealsViewModel
-   lateinit var categoryMealsAdapter: CategoryMealsAdapter
+
+    lateinit var categoryMealsViewModel: CategoryMealsViewModel
+
+    lateinit var categoryMealsAdapter: CategoryMealsAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCategoryMealsBinding.inflate(layoutInflater)
         setContentView(binding.root)
         prepareRecyclerView()
         categoryMealsViewModel = ViewModelProviders.of(this)[categoryMealsViewModel::class.java]
+
         categoryMealsViewModel.getMealsByCategory(intent.getStringExtra(HomeFragment.CATEGORY_NAME)!!)
-        categoryMealsViewModel.observeMealsLiveData().observe(this, Observer {MealList->
+
+        categoryMealsViewModel.observeMealsLiveData().observe(this, Observer { MealList ->
+
+            binding.tvCategoryCount.text = MealList.size.toString()
+
             categoryMealsAdapter.setMealsList(MealList)
-            binding.tvCategoryCount.text =MealList.size.toString()
-            MealList.forEach{
-          Log.d("tests",it.strMeal)
-      }
+
+
+//            MealList.forEach{
+//          Log.d("tests",it.strMeal)
+//
+//      }
 
         })
     }
 
     private fun prepareRecyclerView() {
-        categoryMealsAdapter =CategoryMealsAdapter()
+        categoryMealsAdapter = CategoryMealsAdapter()
         binding.rvMeals.apply {
-            layoutManager = GridLayoutManager(context,2,GridLayoutManager.VERTICAL,false)
-        adapter = categoryMealsAdapter
+            layoutManager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
+            adapter = categoryMealsAdapter
         }
 
     }
+
 }
